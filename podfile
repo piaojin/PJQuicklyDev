@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target 'PJQuicklyDev' do
+    pod 'Alamofire', '~> 4.4'
+    pod 'Kingfisher', '~> 3.5.0'
+    pod 'SnapKit', '~> 3.2.0'
+    pod 'MJExtension', '~> 3.0.13'
+    pod 'MJRefresh', '~> 3.1.12'
+    pod 'SVProgressHUD'
+end
