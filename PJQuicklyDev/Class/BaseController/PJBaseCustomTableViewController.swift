@@ -1,38 +1,24 @@
 //
-//  PJBaseTableViewController.swift
+//  PJBaseCustomTableViewController.swift
 //  PJQuicklyDev
 //
-//  Created by 飘金 on 2017/4/11.
+//  Created by 飘金 on 2017/4/29.
 //  Copyright © 2017年 飘金. All rights reserved.
 //
 
 import UIKit
 
-class PJBaseTableViewController: PJBaseModelViewController {
+// MARK: 只封装了表格的上下拉刷新以及分页
+class PJBaseCustomTableViewController: PJBaseModelViewController,UITableViewDelegate,UITableViewDataSource {
 
-    /**
-     * 表格的数据源和事件全部放在里面
-     */
-    weak var dataSourceAndDelegate:PJBaseTableViewDataSourceAndDelegate? {
-        didSet{
-            if let isSection = self.dataSourceAndDelegate?.isSection() {
-                if isSection{
-                    self.addItems(items: self.dataSourceAndDelegate?.sectionsItems)
-                }else{
-                    self.addItems(items: self.dataSourceAndDelegate?.items)
-                }
-            }
-            self.tableView?.dataSource = self.dataSourceAndDelegate
-            self.tableView?.delegate = self.dataSourceAndDelegate
-            self.tableView?.reloadData()
-        }
-    }
-    
     lazy var tableView:UITableView? = {
         var tempTableView = UITableView(frame: self.tableViewFrame(), style: self.tableViewStyle())
         tempTableView.backgroundColor = self.view.backgroundColor
-        tempTableView.delegate = self.dataSourceAndDelegate
+        tempTableView.delegate = self
+        tempTableView.dataSource = self
         tempTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tempTableView.estimatedRowHeight = 66
+        tempTableView.rowHeight = UITableViewAutomaticDimension
         self.view.addSubview(tempTableView)
         return tempTableView
     }()
@@ -85,7 +71,7 @@ class PJBaseTableViewController: PJBaseModelViewController {
         let tempFreshHeader = PJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(beginPullDownRefreshing))
         return tempFreshHeader
     }()
-
+    
     lazy var freshFooter:PJRefreshAutoNormalFooter? = {
         let tempFreshFooter = PJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(beginPullUpLoading))
         return tempFreshFooter
@@ -134,7 +120,7 @@ class PJBaseTableViewController: PJBaseModelViewController {
 }
 
 // MARK: - 上下拉刷新数据相关
-extension PJBaseTableViewController{
+extension PJBaseCustomTableViewController{
     
     /**
      下拉刷新
@@ -190,15 +176,6 @@ extension PJBaseTableViewController{
         self.page = 1
         //下拉刷新先清空旧数据
         self.items?.removeAll()
-        //if let 解包,只要成功解包就会进入{}中,并不会因为isSection()的值为true,故这边要这么写
-        if let isSection = self.dataSourceAndDelegate?.isSection() {
-            if isSection{
-                self.dataSourceAndDelegate?.sectionsItems?.removeAll()
-            }else{
-               self.dataSourceAndDelegate?.items?.removeAll()
-            }
-        }
-        
         self.doRequest(requestWay: self.requestWay)
     }
     
@@ -310,7 +287,7 @@ extension PJBaseTableViewController{
 }
 
 // MARK: - tableView相关
-extension PJBaseTableViewController{
+extension PJBaseCustomTableViewController{
     
     /**
      *   子类重写，以设置tableView数据源
@@ -321,7 +298,7 @@ extension PJBaseTableViewController{
 }
 
 // MARK: - 网络请求相关
-extension PJBaseTableViewController{
+extension PJBaseCustomTableViewController{
     
     /**
      在网络请求之前可以做的处理
@@ -350,7 +327,7 @@ extension PJBaseTableViewController{
         super.didFailLoadWithError(failure: failure)
     }
     
-     /**
+    /**
      * 显示正在加载,如果是表格下拉或上拉刷新则不显示加载动画,直接用表格的刷新动画(头部或尾部菊花转圈动画)
      */
     override func showLoading(show: Bool){
@@ -361,5 +338,22 @@ extension PJBaseTableViewController{
         }else{
             super.showLoading(show: show)
         }
+    }
+}
+
+// MARK: - tableView dataSource
+extension PJBaseCustomTableViewController{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let count = self.items?.count else {
+            return 0
+        }
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {
+            return UITableViewCell()
+        }
+        return cell
     }
 }

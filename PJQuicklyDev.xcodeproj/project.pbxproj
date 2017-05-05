@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		92779AE88C9C5A8232FCD3D9 /* Pods_PJQuicklyDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A797E8AC333FE416B2154958 /* Pods_PJQuicklyDev.framework */; };
+		CA1B2A841EB4530B001A184D /* PJBaseCustomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1B2A831EB4530B001A184D /* PJBaseCustomTableViewController.swift */; };
 		CA6BB9DA1E9F9F5E004824DC /* ExpressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6BB9D91E9F9F5E004824DC /* ExpressTableViewCell.swift */; };
 		CAAD194C1E9E56370046E69B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAD194B1E9E56370046E69B /* AppDelegate.swift */; };
 		CAAD194E1E9E56370046E69B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAAD194D1E9E56370046E69B /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 		123A7FCFF14E6526D0DC242E /* Pods-PJQuicklyDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PJQuicklyDev.release.xcconfig"; path = "Pods/Target Support Files/Pods-PJQuicklyDev/Pods-PJQuicklyDev.release.xcconfig"; sourceTree = "<group>"; };
 		8A9925F6494C170D13347A04 /* Pods-PJQuicklyDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PJQuicklyDev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PJQuicklyDev/Pods-PJQuicklyDev.debug.xcconfig"; sourceTree = "<group>"; };
 		A797E8AC333FE416B2154958 /* Pods_PJQuicklyDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PJQuicklyDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA1B2A831EB4530B001A184D /* PJBaseCustomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PJBaseCustomTableViewController.swift; sourceTree = "<group>"; };
 		CA6BB9D91E9F9F5E004824DC /* ExpressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressTableViewCell.swift; sourceTree = "<group>"; };
 		CAAD19481E9E56370046E69B /* PJQuicklyDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PJQuicklyDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAAD194B1E9E56370046E69B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				CAAD197B1E9E565C0046E69B /* PJBaseModelViewController.swift */,
 				CAAD197C1E9E565C0046E69B /* PJBaseTableViewController.swift */,
 				CAAD197D1E9E565C0046E69B /* PJBaseViewController.swift */,
+				CA1B2A831EB4530B001A184D /* PJBaseCustomTableViewController.swift */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				CAAD19901E9E565C0046E69B /* PJBaseViewController.swift in Sources */,
 				CAAD19951E9E565C0046E69B /* PJBaseView.swift in Sources */,
 				CAC1E6701E9F77A0009B5085 /* PJSVProgressHUD.m in Sources */,
+				CA1B2A841EB4530B001A184D /* PJBaseCustomTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

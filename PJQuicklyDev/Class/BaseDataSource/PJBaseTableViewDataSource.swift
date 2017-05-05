@@ -8,10 +8,25 @@
 
 import UIKit
 
+protocol  PJBaseTableViewDataSourceDelegate{
+    
+    /**
+     * 子类必须实现协议,以告诉表格每个model所对应的cell是哪个
+     */
+    func tableView(tableView: UITableView, cellClassForObject object: AnyObject?) -> AnyClass
+    
+    /**
+     *若为多组需要子类重写
+     */
+    func tableView(tableView: UITableView, indexPathForObject object: AnyObject) -> NSIndexPath?
+    
+    func tableView(tableView: UITableView, objectForRowAtIndexPath indexPath: IndexPath) -> AnyObject?
+}
+
 /**
  * 表格的数据源和事件全部放在里面
  */
-class PJBaseTableViewDataSourceAndDelegate: NSObject,UITableViewDataSource,UITableViewDelegate {
+class PJBaseTableViewDataSourceAndDelegate: NSObject,UITableViewDataSource,UITableViewDelegate,PJBaseTableViewDataSourceDelegate {
     
     /**
      * 单组数据的数据源
@@ -176,6 +191,8 @@ extension PJBaseTableViewDataSourceAndDelegate{
             //设置子控件点击事件
             pjBaseTableViewCell.subVieClickClosure = self.subVieClickClosure
         }
+        
+        self.pj_tableView(tableView, cellForRowAt: indexPath)
         return cell!
     }
     
@@ -263,6 +280,11 @@ extension PJBaseTableViewDataSourceAndDelegate{
 }
 
 extension PJBaseTableViewDataSourceAndDelegate{
+    
+    /// MARK: 子类可以重写以获取到刚初始化的cell,可在此时做一些额外的操作
+    func pj_tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath){
+        
+    }
     
     /**
      * 子类重写,以告诉表格每个model所对应的cell是哪个

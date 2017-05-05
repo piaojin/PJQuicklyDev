@@ -51,9 +51,7 @@ class PJBaseViewController: UIViewController ,PJBaseEmptyViewDelegate,PJBaseErro
         self.initView()
     }
     
-    /**
-     初始化UI控件
-     */
+    // MARK: 初始化UI控件
     func initView(){
         PJPrintLog("子类重写initView以初始化UI控件")
     }
@@ -65,9 +63,7 @@ class PJBaseViewController: UIViewController ,PJBaseEmptyViewDelegate,PJBaseErro
 
 extension PJBaseViewController{
     
-    /**
-     *   初始化导航栏
-     */
+    // MARK: 初始化导航栏
     func initNavigationController(){
         if(self.navigationController != nil){
             //解决右滑不能放回上一个控制器
@@ -79,16 +75,12 @@ extension PJBaseViewController{
         }
     }
     
-    /**
-     * 返回方法,可自定义重写,可以控制动画效果
-     */
+    // MARK: 返回方法,可自定义重写,可以控制动画效果
     func backView(animated: Bool) {
         self.navigationController!.popViewController(animated: true)
     }
     
-    /**
-     * 显示正在加载
-     */
+    // MARK: 显示正在加载
     func showLoading(show: Bool){
         if show{
             PJSVProgressHUD.show(withStatus: "加载中...")
@@ -97,9 +89,7 @@ extension PJBaseViewController{
         }
     }
     
-    /**
-     子类可以重写，以改成需要的错误视图
-     */
+    // MARK: 子类可以重写，以改成需要的错误视图
     func getErrorView() -> PJBaseErrorView{
         let tempErrorView = PJBaseErrorView(frame: self.errorViewFrame())
         tempErrorView.delegate = self
@@ -108,9 +98,7 @@ extension PJBaseViewController{
         return tempErrorView
     }
     
-    /**
-     * 显示空页面
-     */
+    // MARK: 显示空页面
     func showEmpty(show: Bool) {
         if show {
             if !self.isAddEmptyView{
@@ -124,9 +112,7 @@ extension PJBaseViewController{
         }
     }
     
-    /**
-     子类可重写，修改空页面时的坐标
-     */
+    // MARK: 子类可重写，修改空页面时的坐标
     func emptyViewFrame() -> CGRect {
         return self.view.bounds
     }

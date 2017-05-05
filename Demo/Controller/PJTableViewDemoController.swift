@@ -38,7 +38,7 @@ class PJTableViewDemoController: PJBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // MARK: /******发起网络请求,默认get请求******/
+        // MARK: 第一步:/******发起网络请求,默认get请求******/
         self.doRequest()
     }
     
@@ -53,7 +53,7 @@ class PJTableViewDemoController: PJBaseTableViewController {
 extension PJTableViewDemoController{
     
     /**
-     *   子类重写，网络请求完成
+     *   第二步:子类重写，网络请求完成
      */
     override func requestDidFinishLoad(success: AnyObject?, failure: AnyObject?) {
         if let response = success{
@@ -62,6 +62,7 @@ extension PJTableViewDemoController{
         }
     }
  
+    // MARK: 第三步:
     func updateView(expressModel : ExpressModel){
         // TODO: - 注意此处添加网络返回的数据到表格代理数据源中
         self.pjTableViewDemoDataSource.addItems(items: expressModel.data)
