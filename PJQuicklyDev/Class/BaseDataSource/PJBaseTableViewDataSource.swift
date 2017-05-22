@@ -21,6 +21,9 @@ protocol  PJBaseTableViewDataSourceDelegate{
     func tableView(tableView: UITableView, indexPathForObject object: AnyObject) -> NSIndexPath?
     
     func tableView(tableView: UITableView, objectForRowAtIndexPath indexPath: IndexPath) -> AnyObject?
+    
+    /// MARK: 子类可以重写以获取到刚初始化的cell,可在此时做一些额外的操作
+    func pj_tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, cell: UITableViewCell,object:AnyObject?)
 }
 
 /**
@@ -192,7 +195,7 @@ extension PJBaseTableViewDataSourceAndDelegate{
             pjBaseTableViewCell.subVieClickClosure = self.subVieClickClosure
         }
         
-        self.pj_tableView(tableView, cellForRowAt: indexPath)
+        self.pj_tableView(tableView, cellForRowAt: indexPath, cell: cell!, object: object)
         return cell!
     }
     
@@ -282,7 +285,7 @@ extension PJBaseTableViewDataSourceAndDelegate{
 extension PJBaseTableViewDataSourceAndDelegate{
     
     /// MARK: 子类可以重写以获取到刚初始化的cell,可在此时做一些额外的操作
-    func pj_tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath){
+    func pj_tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, cell: UITableViewCell,object:AnyObject?){
         
     }
     
