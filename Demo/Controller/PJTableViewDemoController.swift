@@ -8,6 +8,7 @@
 
 import UIKit
 
+let cellID = "ExpressTableViewCell"
 class PJTableViewDemoDataSource: PJBaseTableViewDataSourceAndDelegate{
     // MARK: /***********必须重写以告诉表格什么数据模型对应什么cell*************/
     override func tableView(tableView: UITableView, cellClassForObject object: AnyObject?) -> AnyClass {
@@ -15,6 +16,16 @@ class PJTableViewDemoDataSource: PJBaseTableViewDataSourceAndDelegate{
             return ExpressTableViewCell.classForCoder()
         }
         return super.tableView(tableView: tableView, cellClassForObject: object)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.fd_heightForCell(withIdentifier: cellID, cacheBy: indexPath) { (cell : Any?) in
+            guard let tempCell = cell as? ExpressTableViewCell else{
+                return
+            }
+            
+            tempCell.setModel(model: self.tableView(tableView: tableView, objectForRowAtIndexPath: indexPath))
+        }
     }
 }
 
@@ -38,6 +49,7 @@ class PJTableViewDemoController: PJBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView?.register(ExpressTableViewCell.classForCoder(), forCellReuseIdentifier: "ExpressTableViewCell")
         // MARK: 第一步:/******发起网络请求,默认get请求******/
         self.doRequest()
     }

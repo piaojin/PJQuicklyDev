@@ -9,4 +9,5 @@ target 'PJQuicklyDev' do
     pod 'MJExtension', '~> 3.0.13'
     pod 'MJRefresh', '~> 3.1.12'
     pod 'SVProgressHUD'
+    pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
 end

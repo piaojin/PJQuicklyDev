@@ -11,5 +11,6 @@
 #import "PJRefreshNormalHeader.h"
 #import "PJRefreshAutoNormalFooter.h"
 #import "PJSVProgressHUD.h"
+#import "UITableView_FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h"
 
 #endif /* PJQuicklyDev_Bridging_Header_h */
