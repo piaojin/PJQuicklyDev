@@ -1,6 +1,6 @@
 # 之前在网上看到一个OC封装的父类,即把网络请求,网络出错处理,没有数据处理,tableView的上下拉刷新,tableView的dataSource和delegate,cell的初始化,高度的计算,分页等都封装到父类.方便开发使用,无需每次都敲一遍.
 ## 这边我自己用Swift3.1又实现了一遍(其中有封装的比较简单的父类,也有封装比较全的父类)并且将其进行了改进(个人认为是改进),方便开发使用,去除了重复的代码与工作.
-# **开始使用吧(这边以使用封装好的表格父类为例)**
+# **开始使用吧(这边以使用封装好的表格父类为例,例子中数据来源是快递的查询API,需要传递快递的编号,写得时候我的那个快递还没到,以后可能数据信息会失效,故自己把快的编号换成一个你自己的淘宝刚下单的宝贝快的编号(postid),对应的快递公司的编号(type)也要修改)[免费的快递查询API地址点击这里](http://www.bejson.com/knownjson/webInterface/)**
 # 第一步创建start
 ### 创建一个实现遵循父协议PJBaseTableViewDataSourceAndDelegate的类PJTableViewDemoDataSource,父协议PJBaseTableViewDataSourceAndDelegate遵循NSObject,UITableViewDataSource,UITableViewDelegate,PJBaseTableViewDataSourceDelegate协议,其中PJBaseTableViewDataSourceDelegate协议的定义如下:
 
