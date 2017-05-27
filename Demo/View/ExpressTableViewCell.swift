@@ -69,7 +69,3 @@ class ExpressTableViewCell: PJBaseTableViewCell{
         self.timeLabel.text = self.expressItemModel?.ftime
     }
 }
-
-extension ExpressTableViewCell{
-    
-}

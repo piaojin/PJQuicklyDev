@@ -25,7 +25,7 @@ class PJBaseTableViewCell: UITableViewCell {
     weak var controller:PJBaseViewController?
     
     /**
-     cell的高度
+     cell的高度,如果是以自动计算高度的方式获取cell高度,则子类无需重写改方法,否则需要子类重写改方法以手动计算cell的高度
      */
     class func tableView(tableView: UITableView, rowHeightForObject model: AnyObject?,indexPath:IndexPath) -> CGFloat{
         return 44.0;

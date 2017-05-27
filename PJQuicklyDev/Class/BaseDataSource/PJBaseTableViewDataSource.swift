@@ -46,6 +46,11 @@ class PJBaseTableViewDataSourceAndDelegate: NSObject,UITableViewDataSource,UITab
     }()
     
     /**
+     * 计算cell高度的方式,自动计算(利用FDTemplateLayoutCell库)和手动frame计算,默认自动计算,如果是手动计算则cell子类需要重写class func tableView(tableView: UITableView, rowHeightForObject model: AnyObject?,indexPath:IndexPath) -> CGFloat
+     */
+    var isAutoCalculate : Bool = true
+    
+    /**
      * cell的点击事件回调闭包     */
     var cellClickClosure :((_ tableView:UITableView,_ indexPath : IndexPath,_ cell : UITableViewCell,_ object : Any?) -> Void)?
     
@@ -203,8 +208,22 @@ extension PJBaseTableViewDataSourceAndDelegate{
         return cell!
     }
     
+    /**
+     计算cell高度的方式,自动计算(利用FDTemplateLayoutCell库)和手动frame计算,默认自动计算,如果是手动计算则cell子类需要重写class func tableView(tableView: UITableView, rowHeightForObject model: AnyObject?,indexPath:IndexPath) -> CGFloat
+     */
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.getHeightForRow(tableView: tableView, atIndexPath: indexPath)
+        //自动计算cell高度(带有缓存)
+        if self.isAutoCalculate{
+            return tableView.fd_heightForCell(withIdentifier: cellID, cacheBy: indexPath) { [weak self] (cell : Any?) in
+                guard let tempCell = cell as? PJBaseTableViewCell else{
+                    return
+                }
+                //自动计算cell高度
+                tempCell.setModel(model: self?.tableView(tableView: tableView, objectForRowAtIndexPath: indexPath))
+            }
+        }else{
+            return self.getHeightForRow(tableView: tableView, atIndexPath: indexPath)
+        }
     }
     
     /**
@@ -218,7 +237,6 @@ extension PJBaseTableViewDataSourceAndDelegate{
      获取cell的高度
      */
     func getHeightForRow(tableView:UITableView, atIndexPath indexPath:IndexPath) -> CGFloat{
-        debugPrint("getHeightForRow")
         let object = self.tableView(tableView: tableView, objectForRowAtIndexPath: indexPath)
         let cls : AnyClass = self.tableView(tableView: tableView, cellClassForObject: object)
         if let tempCls = cls as? PJBaseTableViewCell.Type{

@@ -17,16 +17,6 @@ class PJTableViewDemoDataSource: PJBaseTableViewDataSourceAndDelegate{
         }
         return super.tableView(tableView: tableView, cellClassForObject: object)
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: cellID, cacheBy: indexPath) { (cell : Any?) in
-            guard let tempCell = cell as? ExpressTableViewCell else{
-                return
-            }
-            
-            tempCell.setModel(model: self.tableView(tableView: tableView, objectForRowAtIndexPath: indexPath))
-        }
-    }
 }
 
 class PJTableViewDemoController: PJBaseTableViewController {
