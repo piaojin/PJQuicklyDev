@@ -110,11 +110,12 @@ extension PJBaseTableViewDataSourceAndDelegate{
                 }else{
                     return 1
                 }
+            }else{
+                return 1;
             }
         }else{
             return 1
         }
-        return 1
     }
     
     /**
@@ -195,7 +196,10 @@ extension PJBaseTableViewDataSourceAndDelegate{
             pjBaseTableViewCell.subVieClickClosure = self.subVieClickClosure
         }
         
-        self.pj_tableView(tableView, cellForRowAt: indexPath, cell: cell!, object: object)
+        if object != nil{
+            self.pj_tableView(tableView, cellForRowAt: indexPath, cell: cell!, object: object)
+        }
+        
         return cell!
     }
     
@@ -214,6 +218,7 @@ extension PJBaseTableViewDataSourceAndDelegate{
      获取cell的高度
      */
     func getHeightForRow(tableView:UITableView, atIndexPath indexPath:IndexPath) -> CGFloat{
+        debugPrint("getHeightForRow")
         let object = self.tableView(tableView: tableView, objectForRowAtIndexPath: indexPath)
         let cls : AnyClass = self.tableView(tableView: tableView, cellClassForObject: object)
         if let tempCls = cls as? PJBaseTableViewCell.Type{

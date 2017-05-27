@@ -20,10 +20,6 @@ class ExpressModel: NSObject {
     override class func mj_objectClassInArray() -> [AnyHashable : Any]! {
         return [AnyHashable("data"):ExpressItemModel.classForCoder()]
     }
-    
-//    override static func mj_objectClassInArray() -> [NSObject : AnyObject]! {
-//        return ["data": ExpressItemModel.classForCoder()]
-//    }
 }
 
 /*****{"time":"2017-04-11 18:02:56","ftime":"2017-04-11 18:02:56","context":"[合肥蜀山四部] [合肥市] [合肥蜀山四部]的钟先生已收件 电话:18134500700","location":""}*******/
@@ -32,4 +28,6 @@ class ExpressItemModel: NSObject {
     var ftime : String?
     var context : String?
     var location : String?
+    /***cell的高度***/
+    var rowH : CGFloat = 0
 }

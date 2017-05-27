@@ -6,7 +6,6 @@
 //  Copyright © 2017年 飘金. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 let PJScreenSize   = UIScreen.main.bounds.size

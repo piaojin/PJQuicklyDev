@@ -101,16 +101,23 @@ class ExpressTableViewCell: PJBaseTableViewCell{
      */
     override class func tableView(tableView: UITableView, rowHeightForObject model: AnyObject?,indexPath:IndexPath) -> CGFloat{
         if let tempExpressItemModel = model as? ExpressItemModel{
-            let contextSize : CGSize? = tempExpressItemModel.context?.boundingRect(with: CGSize(width: PJScale(scale:287.5), height: CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 17.0)] , context: nil).size
             
-            var rowH : CGFloat
-            if let contextH = contextSize?.height{
-                PJPrintLog("\(PJScale(scale: 46.0)) : \(contextH)")
-                rowH = contextH + PJScale(scale: 46.0)
+            if tempExpressItemModel.rowH > 0{
+                return tempExpressItemModel.rowH
             }else{
-                rowH = PJScale(scale: 46.0)
+                let contextSize : CGSize? = tempExpressItemModel.context?.boundingRect(with: CGSize(width: PJScale(scale:287.5), height: CGFloat(MAXFLOAT)), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 17.0)] , context: nil).size
+                
+                var rowH : CGFloat
+                if let contextH = contextSize?.height{
+                    PJPrintLog("\(PJScale(scale: 46.0)) : \(contextH)")
+                    rowH = contextH + PJScale(scale: 46.0)
+                }else{
+                    rowH = PJScale(scale: 46.0)
+                }
+                tempExpressItemModel.rowH = rowH
+                return rowH;
             }
-            return rowH;
+            
         }else{
             return 44.0;
         }

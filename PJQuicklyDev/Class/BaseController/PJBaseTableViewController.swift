@@ -22,18 +22,23 @@ class PJBaseTableViewController: PJBaseModelViewController {
                     self.addItems(items: self.dataSourceAndDelegate?.items)
                 }
             }
-            self.tableView?.dataSource = self.dataSourceAndDelegate
-            self.tableView?.delegate = self.dataSourceAndDelegate
-            self.tableView?.reloadData()
+            
+            if let _ = self.tableView?.dataSource {
+                self.tableView?.reloadData()
+            }else{
+                self.tableView?.dataSource = self.dataSourceAndDelegate
+            }
+            
+            if ((self.tableView?.delegate) == nil) {
+                self.tableView?.delegate = self.dataSourceAndDelegate
+            }
         }
     }
     
     lazy var tableView:UITableView? = {
         var tempTableView = UITableView(frame: self.tableViewFrame(), style: self.tableViewStyle())
         tempTableView.backgroundColor = self.view.backgroundColor
-        tempTableView.delegate = self.dataSourceAndDelegate
         tempTableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        self.view.addSubview(tempTableView)
         return tempTableView
     }()
     
@@ -93,8 +98,13 @@ class PJBaseTableViewController: PJBaseModelViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initTableView()
         self.initFreshView()
         self.initTableViewData()
+    }
+    
+    func initTableView(){
+        self.view.addSubview(self.tableView!)
     }
     
     /**
